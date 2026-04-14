@@ -7,12 +7,13 @@ import Scanner from "./pages/Scanner";
 
 import RotaPrivada from "./components/RotaPrivada";
 import Layout from "./components/Layout";
+import { HashRouter } from "react-router-dom";
 
 function App() {
 
   return (
 
-    <BrowserRouter>
+   <HashRouter>
 
       <Routes>
 
@@ -53,7 +54,7 @@ function App() {
 
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
 
   )
 
