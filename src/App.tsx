@@ -1,54 +1,53 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Produtos from "./pages/Produtos";
 import Scanner from "./pages/Scanner";
 
-import RotaPrivada from "./components/RotaPrivada";
 import Layout from "./components/Layout";
-import { HashRouter } from "react-router-dom";
 
 function App() {
 
   return (
 
-   <HashRouter>
+    <HashRouter>
 
       <Routes>
 
-        <Route path="/" element={<Login />} />
+        {/* 🔥 Página inicial direto no sistema */}
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Dashboard />
+            </Layout>
+          }
+        />
 
         <Route
           path="/dashboard"
           element={
-            <RotaPrivada>
-              <Layout>
-                <Dashboard />
-              </Layout>
-            </RotaPrivada>
+            <Layout>
+              <Dashboard />
+            </Layout>
           }
         />
 
         <Route
           path="/produtos"
           element={
-            <RotaPrivada>
-              <Layout>
-                <Produtos />
-              </Layout>
-            </RotaPrivada>
+            <Layout>
+              <Produtos />
+            </Layout>
           }
         />
 
         <Route
           path="/scanner"
           element={
-            <RotaPrivada>
-              <Layout>
-                <Scanner />
-              </Layout>
-            </RotaPrivada>
+            <Layout>
+              <Scanner />
+            </Layout>
           }
         />
 
@@ -60,4 +59,4 @@ function App() {
 
 }
 
-export default App
+export default App;
