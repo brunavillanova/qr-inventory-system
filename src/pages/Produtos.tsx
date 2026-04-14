@@ -53,11 +53,9 @@ function Produtos(){
     }))
 
     const planilha = XLSX.utils.json_to_sheet(dados)
-
     const workbook = XLSX.utils.book_new()
 
     XLSX.utils.book_append_sheet(workbook, planilha, "Produtos")
-
     XLSX.writeFile(workbook, "produtos.xlsx")
 
   }
@@ -83,7 +81,6 @@ function Produtos(){
   async function deletarProduto(id:string){
 
     await api.delete(`/produtos/${id}`)
-
     carregarProdutos()
 
   }
@@ -97,7 +94,6 @@ function Produtos(){
     })
 
     setEditando(null)
-
     setNome("")
     setCodigo("")
     setQuantidade("")
@@ -114,42 +110,50 @@ function Produtos(){
 
     <Container>
 
-      <Typography variant="h4" sx={{ mt:3 }}>
+      <Typography variant="h5" sx={{ mt:3, mb:2 }}>
         Produtos
       </Typography>
 
-      <Typography sx={{ mt:1 }}>
+      <Typography>
         Total de produtos: {produtos.length}
       </Typography>
 
       {/* BUSCA */}
-
       <TextField
         label="Buscar produto"
         fullWidth
-        sx={{ mt:3 }}
+        sx={{ mt:2 }}
         value={busca}
         onChange={(e)=>setBusca(e.target.value)}
       />
 
       {/* FORMULÁRIO */}
-
       <Paper sx={{ p:3, mt:3 }}>
 
         <Typography variant="h6">
           {editando ? "Editar Produto" : "Cadastrar Produto"}
         </Typography>
 
-        <Box sx={{ display:"flex", gap:2, mt:2 }}>
+        {/* INPUTS RESPONSIVOS */}
+        <Box
+          sx={{
+            display:"flex",
+            flexDirection:{ xs:"column", sm:"row" },
+            gap:2,
+            mt:2
+          }}
+        >
 
           <TextField
             label="Nome"
+            fullWidth
             value={nome}
             onChange={(e)=>setNome(e.target.value)}
           />
 
           <TextField
             label="Código"
+            fullWidth
             value={codigo}
             onChange={(e)=>setCodigo(e.target.value)}
           />
@@ -157,12 +161,26 @@ function Produtos(){
           <TextField
             label="Quantidade"
             type="number"
+            fullWidth
             value={quantidade}
             onChange={(e)=>setQuantidade(e.target.value)}
           />
 
+        </Box>
+
+        {/* BOTÕES */}
+        <Box
+          sx={{
+            mt:2,
+            display:"flex",
+            flexDirection:{ xs:"column", sm:"row" },
+            gap:2
+          }}
+        >
+
           <Button
             variant="contained"
+            fullWidth
             onClick={() => {
               if (editando) {
                 salvarEdicao(editando)
@@ -175,7 +193,8 @@ function Produtos(){
           </Button>
 
           <Button
-            variant="contained"
+            variant="outlined"
+            fullWidth
             onClick={exportarExcel}
           >
             Exportar Excel
@@ -186,88 +205,94 @@ function Produtos(){
       </Paper>
 
       {/* TABELA */}
-
       <Paper sx={{ p:3, mt:3 }}>
 
-        <Table>
+        <Box sx={{ overflowX:"auto" }}>
 
-          <TableHead>
+          <Table>
 
-            <TableRow>
-
-              <TableCell>Nome</TableCell>
-              <TableCell>Código</TableCell>
-              <TableCell>Quantidade</TableCell>
-              <TableCell>QR Code</TableCell>
-              <TableCell>Ações</TableCell>
-
-            </TableRow>
-
-          </TableHead>
-
-          <TableBody>
-
-            {produtosFiltrados.map(produto=>(
-
-              <TableRow key={produto.id}>
-
-                <TableCell>{produto.nome}</TableCell>
-
-                <TableCell>{produto.codigo}</TableCell>
-
-                <TableCell
-                  sx={{
-                    color: produto.quantidade <= 3 ? "red" : "inherit",
-                    fontWeight: produto.quantidade <= 3 ? "bold" : "normal"
-                  }}
-                >
-                  {produto.quantidade}
-                </TableCell>
-
-                <TableCell>
-
-                  <QRCodeCanvas
-                    value={produto.codigo}
-                    size={60}
-                  />
-
-                </TableCell>
-
-                <TableCell>
-
-                  <Button
-                    size="small"
-                    onClick={()=>{
-                      setEditando(produto.id)
-                      setNome(produto.nome)
-                      setCodigo(produto.codigo)
-                      setQuantidade(String(produto.quantidade))
-                    }}
-                  >
-                    Editar
-                  </Button>
-
-                  <Button
-                    size="small"
-                    color="error"
-                    onClick={()=>{
-                      if(confirm("Deseja realmente deletar este produto?")){
-                        deletarProduto(produto.id)
-                      }
-                    }}
-                  >
-                    Deletar
-                  </Button>
-
-                </TableCell>
-
+            <TableHead>
+              <TableRow>
+                <TableCell>Nome</TableCell>
+                <TableCell>Código</TableCell>
+                <TableCell>Quantidade</TableCell>
+                <TableCell>QR Code</TableCell>
+                <TableCell>Ações</TableCell>
               </TableRow>
+            </TableHead>
 
-            ))}
+            <TableBody>
 
-          </TableBody>
+              {produtosFiltrados.map(produto=>(
 
-        </Table>
+                <TableRow key={produto.id}>
+
+                  <TableCell>{produto.nome}</TableCell>
+
+                  <TableCell>{produto.codigo}</TableCell>
+
+                  <TableCell
+                    sx={{
+                      color: produto.quantidade <= 3 ? "red" : "inherit",
+                      fontWeight: produto.quantidade <= 3 ? "bold" : "normal"
+                    }}
+                  >
+                    {produto.quantidade}
+                  </TableCell>
+
+                  <TableCell>
+                    <QRCodeCanvas value={produto.codigo} size={50}/>
+                  </TableCell>
+
+                  <TableCell>
+
+                    <Box
+                      sx={{
+                        display:"flex",
+                        flexDirection:{ xs:"column", sm:"row" },
+                        gap:1
+                      }}
+                    >
+
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={()=>{
+                          setEditando(produto.id)
+                          setNome(produto.nome)
+                          setCodigo(produto.codigo)
+                          setQuantidade(String(produto.quantidade))
+                        }}
+                      >
+                        Editar
+                      </Button>
+
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="error"
+                        onClick={()=>{
+                          if(confirm("Deseja deletar este produto?")){
+                            deletarProduto(produto.id)
+                          }
+                        }}
+                      >
+                        Deletar
+                      </Button>
+
+                    </Box>
+
+                  </TableCell>
+
+                </TableRow>
+
+              ))}
+
+            </TableBody>
+
+          </Table>
+
+        </Box>
 
       </Paper>
 
@@ -277,4 +302,4 @@ function Produtos(){
 
 }
 
-export default Produtos
+export default Produtos;
