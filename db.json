@@ -1,0 +1,92 @@
+{
+  "produtos": [
+    {
+      "nome": "Mouse Gamer",
+      "codigo": "PRODUTO001",
+      "quantidade": 0,
+      "id": "FQsyAijreHU"
+    },
+    {
+      "nome": "Teclado Mecânico",
+      "codigo": "PRODUTO002",
+      "quantidade": 5,
+      "id": "ioyn2BFCbug"
+    },
+    {
+      "nome": "CAIXA DE SOM USB",
+      "codigo": "PRODUT0003",
+      "quantidade": 1,
+      "id": "_HXXlwH9SMk"
+    }
+  ],
+  "movimentacoes": [
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Entrada",
+      "data": "14/04/2026, 15:02:32",
+      "id": "UREnncPuKwk"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:33",
+      "id": "ko7QyIWC1Js"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:36",
+      "id": "-R91n464MOk"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:37",
+      "id": "8OYj8qoi30I"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:37",
+      "id": "hTkcRIbtUeM"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:37",
+      "id": "hYo-kaUPgWM"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:38",
+      "id": "hOac2eSMDBs"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:38",
+      "id": "cqq_USzkvd8"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:39",
+      "id": "hEQLNuE_U8g"
+    },
+    {
+      "produto": "Mouse Gamer",
+      "tipo": "Saída",
+      "data": "14/04/2026, 16:24:39",
+      "id": "NkHXIuVsaWs"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "1",
+      "email": "admin@email.com",
+      "senha": "123456"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
